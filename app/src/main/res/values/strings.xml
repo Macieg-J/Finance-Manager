@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">Finance Manager</string>
     <string name="entry_title_text">Enter new entry data</string>
-    <string name="entry_name_text">Entry name:</string>
-    <string name="entry_name_hint_text">Ticket</string>
+    <string name="enter_category_name_text">Enter category name:</string>
+    <string name="entry_category_name_hint_text">Cinema</string>
     <string name="entry_value_hint_text">30</string>
     <string name="entry_cost_text">Enter cost:</string>
     <string name="entry_date_text">Enter date:</string>
     <string name="entry_date_hint_text">11-04-2021</string>
     <string name="entry_confirm_button_text">Confirm</string>
     <string name="entry_cancel_button_text">Cancel</string>
+    <string name="entry_place_text">Enter place:</string>
+    <string name="entry_place_hintText">Multikino Młociny</string>
 </resources>

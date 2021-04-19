@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/item_finance_icon"
+            android:id="@+id/item_finance_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
@@ -32,7 +32,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@id/item_finance_icon"
+            android:layout_toRightOf="@id/item_finance_image"
             android:text="Product category"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -68,7 +68,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@id/item_finance_icon"
+            android:layout_toRightOf="@id/item_finance_image"
             android:text="Date"
             android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 

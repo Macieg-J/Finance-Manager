@@ -17,27 +17,50 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/entry_name_textView"
+        android:id="@+id/entry_category_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/entry_name_text"
+        android:text="@string/enter_category_name_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entry_title_textView" />
 
+    <TextView
+        android:id="@+id/entry_place_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/entry_place_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entry_category_edit_text" />
+
     <EditText
-        android:id="@+id/entry_name_editText"
+        android:id="@+id/entry_place_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="@string/entry_name_hint_text"
+        android:hint="@string/entry_place_hintText"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entry_name_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/entry_place_textView" />
+
+    <EditText
+        android:id="@+id/entry_category_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/entry_category_name_hint_text"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entry_category_textView" />
 
     <TextView
         android:id="@+id/entry_value_textView"
@@ -48,7 +71,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entry_name_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/entry_place_editText" />
 
     <EditText
         android:id="@+id/entry_value_editText"

@@ -9,7 +9,7 @@ class FinanceViewHolder(
 ) : RecyclerView.ViewHolder(layoutBinding.root) {
 
     fun bind(finance: FinanceModel) = with(layoutBinding) {
-        itemFinanceIcon.setImageBitmap(finance.photo)
+        itemFinanceImage.setImageBitmap(finance.image)
         itemFinanceProductCategory.text = finance.category
         itemFinancePlace.text = finance.place
         itemFinanceProductCost.text = finance.cost

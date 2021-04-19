@@ -1,16 +1,31 @@
 package com.example.financemanager
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.financemanager.adapter.FinanceAdapter
 import com.example.financemanager.databinding.ActivityMainBinding
+import com.example.financemanager.model.FinanceModel
 
 class MainActivity : AppCompatActivity() {
+    private val TAG = "MainActivity"
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val financeAdapter by lazy { FinanceAdapter() }
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val x = result.data?.getParcelableExtra<FinanceModel>("ENTRY_INFO")
+                financeAdapter.add(x!!)
+                Log.d(TAG, financeAdapter.toString())
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,18 +36,9 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
         }
 
-
-        val newEntry: Intent = Intent(this, EntryActivity::class.java)
-
         val floatingActionButton: View = findViewById(R.id.floatingActionButton)
         floatingActionButton.setOnClickListener { _ ->
-            startActivity(newEntry)
-        }
-    }
-
-    private fun setupRecycler() {
-        binding.mainListOfPayments.apply {
-            adapter = FinanceAdapter()
+            startForResult.launch(Intent(this, EntryActivity::class.java))
         }
     }
 }
