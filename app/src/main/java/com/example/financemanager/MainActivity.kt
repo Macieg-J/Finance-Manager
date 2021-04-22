@@ -2,7 +2,6 @@ package com.example.financemanager
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,7 +16,7 @@ import com.example.financemanager.model.FinanceModel
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val financeAdapter by lazy { FinanceAdapter() }
+    private val financeAdapter by lazy { FinanceAdapter(this::onEditClicked) }
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -40,5 +39,11 @@ class MainActivity : AppCompatActivity() {
         floatingActionButton.setOnClickListener { _ ->
             startForResult.launch(Intent(this, EntryActivity::class.java))
         }
+    }
+
+    private fun onEditClicked(model: FinanceModel) { // todo also selected model should be deleted!
+        val editIntent = Intent(this, EntryActivity::class.java)
+        editIntent.putExtra("ENTRY_TO_EDIT", model)
+        startActivity(editIntent)
     }
 }
