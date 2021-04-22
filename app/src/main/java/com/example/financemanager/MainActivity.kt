@@ -41,9 +41,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onEditClicked(model: FinanceModel) { // todo also selected model should be deleted!
+    private fun onEditClicked(model: FinanceModel) {
         val editIntent = Intent(this, EntryActivity::class.java)
         editIntent.putExtra("ENTRY_TO_EDIT", model)
-        startActivity(editIntent)
+        financeAdapter.removeRecentlyClickedEntry()
+        startForResult.launch(editIntent)
     }
 }

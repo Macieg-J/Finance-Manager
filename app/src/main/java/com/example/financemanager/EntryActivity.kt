@@ -16,12 +16,6 @@ import java.util.*
 
 class EntryActivity : AppCompatActivity() {
     private val binding by lazy { ActivityEntryBinding.inflate(layoutInflater) }
-    private val startForResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                recreateToEdit(result.data!!.getParcelableExtra<FinanceModel>("ENTRY_TO_EDIT")!!)
-            }
-        }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,11 +48,11 @@ class EntryActivity : AppCompatActivity() {
             }
         }
 
-        if (fetchedFinanceModel != null) { // fixme even if we edit entry data
+        if (fetchedFinanceModel != null) {
             recreateToEdit(fetchedFinanceModel)
         }
+
         binding.entryCancelButton.setOnClickListener { _ -> finish() }
-//        if (fetchedFinanceModel == null) {
         binding.entryConfirmButton.setOnClickListener { _ ->
             val createdFinanceModel = FinanceModel(
                 resources.getDrawable(R.drawable.ic_launcher_foreground, theme).toBitmap(),
@@ -73,18 +67,9 @@ class EntryActivity : AppCompatActivity() {
             setResult(
                 Activity.RESULT_OK,
                 resultIntent
-            ) // fixme https://developer.android.com/training/basics/intents/result
+            )
             finish()
-//            }
-//        } else {
-//            recreateToEdit(fetchedFinanceModel)
-//        }
         }
-
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) { // powinno być z drugiej strony!!!
-//        super.onActivityResult(requestCode, resultCode, data)
-//        val fetchedData = data!!.getParcelableExtra<FinanceModel>("ENTRY_TO_EDIT")
-//        recreateToEdit(fetchedData!!)
     }
 
     private fun recreateToEdit(financeModel: FinanceModel) {

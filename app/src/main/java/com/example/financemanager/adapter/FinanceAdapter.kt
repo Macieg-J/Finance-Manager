@@ -12,6 +12,8 @@ import com.example.financemanager.model.FinanceModel
 class FinanceAdapter(private val editListener: (FinanceModel) -> Unit) :
     RecyclerView.Adapter<FinanceViewHolder>() {
     private val financeList = mutableListOf<FinanceModel>()
+    private var clickedEntryPosition = Integer.MIN_VALUE
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FinanceViewHolder {
         val binding = ItemFinanceBinding.inflate(
@@ -20,7 +22,10 @@ class FinanceAdapter(private val editListener: (FinanceModel) -> Unit) :
             false
         )
         return FinanceViewHolder(binding).also { holder ->
-            binding.root.setOnClickListener { editListener(financeList[holder.layoutPosition]) }
+            binding.root.setOnClickListener {
+                clickedEntryPosition = holder.layoutPosition
+                editListener(financeList[holder.layoutPosition])
+            }
             binding.root.setOnLongClickListener { remove(holder.layoutPosition) } // maby snackbar
         }
     }
@@ -43,5 +48,12 @@ class FinanceAdapter(private val editListener: (FinanceModel) -> Unit) :
             return true
         }
         return false
+    }
+
+    fun removeRecentlyClickedEntry() {
+        if (clickedEntryPosition >= 0 && clickedEntryPosition < financeList.size) {
+            financeList.removeAt(clickedEntryPosition)
+            notifyItemRemoved(clickedEntryPosition)
+        }
     }
 }
