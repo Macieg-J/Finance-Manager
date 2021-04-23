@@ -11,4 +11,5 @@
     <string name="entry_cancel_button_text">Cancel</string>
     <string name="entry_place_text">Enter place:</string>
     <string name="entry_place_hintText">Multikino Młociny</string>
+    <string name="main_balance_text">Balance:</string>
 </resources>

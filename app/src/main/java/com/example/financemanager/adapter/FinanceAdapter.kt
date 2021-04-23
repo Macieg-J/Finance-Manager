@@ -1,15 +1,16 @@
 package com.example.financemanager.adapter
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.financemanager.databinding.ItemFinanceBinding
 import com.example.financemanager.model.FinanceModel
+import java.util.function.Consumer
 
-class FinanceAdapter(private val editListener: (FinanceModel) -> Unit) :
+class FinanceAdapter(
+    private val editListener: (FinanceModel) -> Unit,
+    private val deleteListener: (FinanceModel) -> Boolean
+) :
     RecyclerView.Adapter<FinanceViewHolder>() {
     private val financeList = mutableListOf<FinanceModel>()
     private var clickedEntryPosition = Integer.MIN_VALUE
@@ -26,7 +27,10 @@ class FinanceAdapter(private val editListener: (FinanceModel) -> Unit) :
                 clickedEntryPosition = holder.layoutPosition
                 editListener(financeList[holder.layoutPosition])
             }
-            binding.root.setOnLongClickListener { remove(holder.layoutPosition) } // maby snackbar
+            binding.root.setOnLongClickListener { _ ->
+                deleteListener(financeList[holder.layoutPosition])
+            }
+//                remove(holder.layoutPosition) } // maby snackbar
         }
     }
 
@@ -55,5 +59,13 @@ class FinanceAdapter(private val editListener: (FinanceModel) -> Unit) :
             financeList.removeAt(clickedEntryPosition)
             notifyItemRemoved(clickedEntryPosition)
         }
+    }
+
+    fun sumAllValues(): Double {
+        var sumOfCosts = 0.0
+        for (element in financeList) {
+            sumOfCosts += element.cost.toDouble()
+        }
+        return sumOfCosts
     }
 }
