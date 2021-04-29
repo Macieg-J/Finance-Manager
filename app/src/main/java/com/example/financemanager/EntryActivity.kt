@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import com.example.financemanager.databinding.ActivityEntryBinding
 import com.example.financemanager.model.FinanceModel
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class EntryActivity : AppCompatActivity() {
@@ -60,7 +62,7 @@ class EntryActivity : AppCompatActivity() {
                     .toString(),
                 binding.entryPlaceEditText.text.toString(),
                 binding.entryValueEditText.text.toString(),
-                binding.entryDateEditText.text.toString()
+                exchangeStringToDate(binding.entryDateEditText.text.toString())
             )
             val resultIntent = Intent()
             resultIntent.putExtra("ENTRY_INFO", createdFinanceModel)
@@ -75,6 +77,10 @@ class EntryActivity : AppCompatActivity() {
     private fun recreateToEdit(financeModel: FinanceModel) {
         binding.entryPlaceEditText.setText(financeModel.place)
         binding.entryValueEditText.setText(financeModel.cost)
-        binding.entryDateEditText.setText(financeModel.date)
+        binding.entryDateEditText.setText(financeModel.date.toString())
+    }
+
+    private fun exchangeStringToDate(dateString: String) : LocalDate {
+        return LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE)
     }
 }

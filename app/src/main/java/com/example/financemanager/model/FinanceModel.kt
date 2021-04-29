@@ -11,5 +11,5 @@ data class FinanceModel(
     val category : String,
     val place: String,
     val cost: String,
-    val date: String // todo change to date (LocalDate?)
+    val date: LocalDate // todo change to date (LocalDate?)
 ) : Parcelable

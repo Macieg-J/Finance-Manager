@@ -30,7 +30,6 @@ class FinanceAdapter(
             binding.root.setOnLongClickListener { _ ->
                 deleteListener(financeList[holder.layoutPosition])
             }
-//                remove(holder.layoutPosition) } // maby snackbar
         }
     }
 
