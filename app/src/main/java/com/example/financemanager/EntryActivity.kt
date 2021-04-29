@@ -56,14 +56,28 @@ class EntryActivity : AppCompatActivity() {
 
         binding.entryCancelButton.setOnClickListener { _ -> finish() }
         binding.entryConfirmButton.setOnClickListener { _ ->
-            val createdFinanceModel = FinanceModel(
-                resources.getDrawable(R.drawable.ic_launcher_foreground, theme).toBitmap(),
-                binding.entryCategorySpinner.getItemAtPosition(spinner.selectedItemId.toInt())
-                    .toString(),
-                binding.entryPlaceEditText.text.toString(),
-                binding.entryValueEditText.text.toString(),
-                exchangeStringToDate(binding.entryDateEditText.text.toString())
-            )
+            lateinit var createdFinanceModel: FinanceModel
+            if (fetchedFinanceModel == null) {
+                createdFinanceModel = FinanceModel(
+                    UUID.randomUUID().toString(),
+                    resources.getDrawable(R.drawable.ic_launcher_foreground, theme).toBitmap(),
+                    binding.entryCategorySpinner.getItemAtPosition(spinner.selectedItemId.toInt())
+                        .toString(),
+                    binding.entryPlaceEditText.text.toString(),
+                    binding.entryValueEditText.text.toString(),
+                    exchangeStringToDate(binding.entryDateEditText.text.toString())
+                )
+            } else {
+                createdFinanceModel = FinanceModel(
+                    fetchedFinanceModel.id,
+                    resources.getDrawable(R.drawable.ic_launcher_foreground, theme).toBitmap(),
+                    binding.entryCategorySpinner.getItemAtPosition(spinner.selectedItemId.toInt())
+                        .toString(),
+                    binding.entryPlaceEditText.text.toString(),
+                    binding.entryValueEditText.text.toString(),
+                    exchangeStringToDate(binding.entryDateEditText.text.toString())
+                )
+            }
             val resultIntent = Intent()
             resultIntent.putExtra("ENTRY_INFO", createdFinanceModel)
             setResult(
@@ -80,7 +94,7 @@ class EntryActivity : AppCompatActivity() {
         binding.entryDateEditText.setText(financeModel.date.toString())
     }
 
-    private fun exchangeStringToDate(dateString: String) : LocalDate {
+    private fun exchangeStringToDate(dateString: String): LocalDate {
         return LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE)
     }
 }

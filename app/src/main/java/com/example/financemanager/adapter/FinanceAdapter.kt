@@ -13,7 +13,6 @@ class FinanceAdapter(
 ) :
     RecyclerView.Adapter<FinanceViewHolder>() {
     private val financeList = mutableListOf<FinanceModel>()
-    private var clickedEntryPosition = Integer.MIN_VALUE
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FinanceViewHolder {
@@ -24,7 +23,6 @@ class FinanceAdapter(
         )
         return FinanceViewHolder(binding).also { holder ->
             binding.root.setOnClickListener {
-                clickedEntryPosition = holder.layoutPosition
                 editListener(financeList[holder.layoutPosition])
             }
             binding.root.setOnLongClickListener { _ ->
@@ -44,21 +42,18 @@ class FinanceAdapter(
         notifyItemInserted(financeList.size - 1)
     }
 
-    fun remove(position: Int): Boolean {
-        if (position >= 0 && position < financeList.size) {
-            financeList.removeAt(position)
-            notifyItemRemoved(position)
-            return true
-        }
-        return false
+    fun replaceIfExists(financeModel: FinanceModel) {
+        financeList.removeIf { it.id == financeModel.id }
+        financeList.add(financeModel)
+        notifyDataSetChanged()
     }
 
-    fun removeRecentlyClickedEntry() {
-        if (clickedEntryPosition >= 0 && clickedEntryPosition < financeList.size) {
-            financeList.removeAt(clickedEntryPosition)
-            notifyItemRemoved(clickedEntryPosition)
-        }
+    fun remove(financeModel: FinanceModel){
+        financeList.remove(financeModel)
+        notifyDataSetChanged()
     }
+
+    override fun getItemId(position: Int): Long = financeList[position].id.toLong()
 
     fun sumAllValues(): Double {
         var sumOfCosts = 0.0

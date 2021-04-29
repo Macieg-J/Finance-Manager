@@ -5,11 +5,14 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 import java.time.LocalDate
+import java.util.*
+
 @Parcelize
 data class FinanceModel(
+    var id: String,
     val image: Bitmap,
     val category : String,
     val place: String,
     val cost: String,
-    val date: LocalDate // todo change to date (LocalDate?)
+    val date: LocalDate
 ) : Parcelable

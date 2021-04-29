@@ -6,7 +6,7 @@
     <string name="entry_value_hint_text">30</string>
     <string name="entry_cost_text">Enter cost:</string>
     <string name="entry_date_text">Enter date:</string>
-    <string name="entry_date_hint_text" tools:ignore="TypographyDashes">2021-05-13</string>
+    <string name="entry_date_hint_text" tools:ignore="TypographyDashes">2021-04-13</string>
     <string name="entry_confirm_button_text">Confirm</string>
     <string name="entry_cancel_button_text">Cancel</string>
     <string name="entry_place_text">Enter place:</string>
