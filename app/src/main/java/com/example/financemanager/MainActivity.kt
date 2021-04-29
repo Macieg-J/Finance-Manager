@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity() {
     private fun onEditClicked(model: FinanceModel) {
         val editIntent = Intent(this, EntryActivity::class.java)
         editIntent.putExtra("ENTRY_TO_EDIT", model)
-//        getAdapterForCurrentMonth()!!.removeRecentlyClickedEntry()
         startForResult.launch(editIntent)
     }
 
@@ -82,29 +81,6 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         binding.mainBalanceValueTextView.text = getAdapterForCurrentMonth()!!.sumAllValues().toString()
     }
-
-//    private fun checkIfAlreadyExists(model: FinanceModel){
-//        val x = mapOfAllMonths[model.date.month]
-//        x.re
-//    }
-
-//    private fun checkMonthAndPut(model: FinanceModel) {
-//        when (model.date.month) {
-//            JANUARY -> mapOfAllMonths[JANUARY]?.add(model)
-//            FEBRUARY -> mapOfAllMonths[FEBRUARY]?.add(model)
-//            MARCH -> mapOfAllMonths[MARCH]?.add(model)
-//            APRIL -> mapOfAllMonths[APRIL]?.add(model)
-//            MAY -> mapOfAllMonths[MAY]?.add(model)
-//            JUNE -> mapOfAllMonths[JUNE]?.add(model)
-//            JULY -> mapOfAllMonths[JULY]?.add(model)
-//            AUGUST -> mapOfAllMonths[AUGUST]?.add(model)
-//            SEPTEMBER -> mapOfAllMonths[SEPTEMBER]?.add(model)
-//            OCTOBER -> mapOfAllMonths[OCTOBER]?.add(model)
-//            NOVEMBER -> mapOfAllMonths[NOVEMBER]?.add(model)
-//            DECEMBER -> mapOfAllMonths[DECEMBER]?.add(model)
-//            null -> mapOfAllMonths[JANUARY]?.add(model)
-//        }
-//    }
 
     private fun initialiseMapOfMonths(): Map<Month, FinanceAdapter> {
         return mapOf(

@@ -2,6 +2,7 @@ package com.example.financemanager
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -16,7 +17,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class EntryActivity : AppCompatActivity() {
+class EntryActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private val binding by lazy { ActivityEntryBinding.inflate(layoutInflater) }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -65,7 +66,7 @@ class EntryActivity : AppCompatActivity() {
                         .toString(),
                     binding.entryPlaceEditText.text.toString(),
                     binding.entryValueEditText.text.toString(),
-                    exchangeStringToDate(binding.entryDateEditText.text.toString())
+                    exchangeStringToDate(binding.entryDateValueTextView.text.toString())
                 )
             } else {
                 createdFinanceModel = FinanceModel(
@@ -75,7 +76,7 @@ class EntryActivity : AppCompatActivity() {
                         .toString(),
                     binding.entryPlaceEditText.text.toString(),
                     binding.entryValueEditText.text.toString(),
-                    exchangeStringToDate(binding.entryDateEditText.text.toString())
+                    exchangeStringToDate(binding.entryDateValueTextView.text.toString())
                 )
             }
             val resultIntent = Intent()
@@ -88,13 +89,22 @@ class EntryActivity : AppCompatActivity() {
         }
     }
 
+    fun showDatePickerDialog(view: View) {
+        val newFragment = DatePickerFragment()
+        newFragment.show(supportFragmentManager, "datePicker")
+    }
+
     private fun recreateToEdit(financeModel: FinanceModel) {
         binding.entryPlaceEditText.setText(financeModel.place)
         binding.entryValueEditText.setText(financeModel.cost)
-        binding.entryDateEditText.setText(financeModel.date.toString())
+        binding.entryDateValueTextView.text = financeModel.date.toString()
     }
 
     private fun exchangeStringToDate(dateString: String): LocalDate {
         return LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE)
+    }
+
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        binding.entryDateValueTextView.text = LocalDate.of(year, month + 1, dayOfMonth).toString()
     }
 }
