@@ -65,13 +65,13 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Delete position")
             .setMessage("Are you sure you want to delete this position?")
-            .setPositiveButton(android.R.string.yes, object : DialogInterface.OnClickListener {
+            .setPositiveButton(android.R.string.ok, object : DialogInterface.OnClickListener {
                 override fun onClick(dialog: DialogInterface?, which: Int) {
                     getAdapterForCurrentMonth()!!.remove(model)
                     binding.mainBalanceValueTextView.text = getAdapterForCurrentMonth()!!.sumAllValues().toString()
                 }
             })
-            .setNegativeButton(android.R.string.no, null)
+            .setNegativeButton(android.R.string.cancel, null)
             .setIcon(android.R.drawable.ic_dialog_alert)
             .show()
         return true

@@ -21,6 +21,18 @@
             android:name=".EntryActivity"
             android:label="New entry">
         </activity>
+
+<!--        <activity android:name=".ChartActivity">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
+        <activity android:name=".ChartActivity"
+            android:label="chart"/>
+
     </application>
 
 </manifest>
