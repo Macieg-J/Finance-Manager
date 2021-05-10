@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.financemanager.databinding.ItemFinanceBinding
 import com.example.financemanager.model.FinanceModel
-import java.util.function.Consumer
 
 class FinanceAdapter(
     private val editListener: (FinanceModel) -> Unit,
@@ -48,7 +47,7 @@ class FinanceAdapter(
         notifyDataSetChanged()
     }
 
-    fun remove(financeModel: FinanceModel){
+    fun remove(financeModel: FinanceModel) {
         financeList.remove(financeModel)
         notifyDataSetChanged()
     }

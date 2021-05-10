@@ -3,9 +3,7 @@ package com.example.financemanager
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import java.time.LocalDate
 import java.util.*
 
 class DatePickerFragment : DialogFragment() {

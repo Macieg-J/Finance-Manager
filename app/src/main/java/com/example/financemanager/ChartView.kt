@@ -34,7 +34,6 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
     fun setData(entryPoints: List<EntryPoint>) {
         setOfEntryPoints.clear()
         setOfEntryPoints.addAll(entryPoints)
-//        xMin = entryPoints.minByOrNull { it.xPosition }?.xPosition ?: 0
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -47,7 +46,13 @@ class ChartView(context: Context, attributeSet: AttributeSet) : View(context, at
                 chartStartPointOY,
                 paint
             ) // OX axis
-            drawLine(chartStartPointOX, chartStartPointOY, chartStartPointOX, 80f, paint) // OY axis
+            drawLine(
+                chartStartPointOX,
+                chartStartPointOY,
+                chartStartPointOX,
+                80f,
+                paint
+            ) // OY axis
             drawText("Time", 140f, 1800f, paint) // OX title
         }
     }

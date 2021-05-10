@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import android.widget.Toast.LENGTH_LONG
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import com.example.financemanager.databinding.ActivityEntryBinding

@@ -21,7 +21,6 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-//    private val financeAdapter by lazy { FinanceAdapter(this::onEditClicked, this::onRemoveAction) }
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
                 mapOfAllMonths[resultModel.date.month]!!.replaceIfExists(resultModel)
             }
         }
-// todo zamiast 12 adapterów zrobić 12 list i po prostu na jednym adapterze wołać set
+
     private val mapOfAllMonths: Map<Month, FinanceAdapter> = initialiseMapOfMonths()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,17 +39,19 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
         }
 
-        binding.mainBalanceValueTextView.text = getAdapterForCurrentMonth()!!.sumAllValues().toString()
+        binding.mainBalanceValueTextView.text =
+            getAdapterForCurrentMonth()!!.sumAllValues().toString()
 
         val floatingActionButton: View = findViewById(R.id.floatingActionButton)
         floatingActionButton.setOnClickListener { _ ->
             startForResult.launch(Intent(this, EntryActivity::class.java))
         }
     }
-// customView
+
     private fun getAdapterForMonth(month: Month): FinanceAdapter? {
         return mapOfAllMonths[month]
     }
+
     private fun getAdapterForCurrentMonth(): FinanceAdapter? {
         return mapOfAllMonths[LocalDate.now().month]
     }
@@ -68,7 +69,8 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton(android.R.string.ok, object : DialogInterface.OnClickListener {
                 override fun onClick(dialog: DialogInterface?, which: Int) {
                     getAdapterForCurrentMonth()!!.remove(model)
-                    binding.mainBalanceValueTextView.text = getAdapterForCurrentMonth()!!.sumAllValues().toString()
+                    binding.mainBalanceValueTextView.text =
+                        getAdapterForCurrentMonth()!!.sumAllValues().toString()
                 }
             })
             .setNegativeButton(android.R.string.cancel, null)
@@ -79,7 +81,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        binding.mainBalanceValueTextView.text = getAdapterForCurrentMonth()!!.sumAllValues().toString()
+        binding.mainBalanceValueTextView.text =
+            getAdapterForCurrentMonth()!!.sumAllValues().toString()
     }
 
     private fun initialiseMapOfMonths(): Map<Month, FinanceAdapter> {
